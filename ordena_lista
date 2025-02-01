@@ -1,0 +1,27 @@
+#posible solucion al ejercicio 30 de https://retosdeprogramacion.com/ejercicios/
+#Crea una función que ordene y retorne una matriz de números.
+# * - La función recibirá un listado (por ejemplo [2, 4, 6, 8, 9]) y un parámetro
+# *   adicional "Asc" o "Desc" para indicar si debe ordenarse de menor a mayor
+# *   o de mayor a menor.
+# * - No se pueden utilizar funciones propias del lenguaje que lo resuelvan
+# *   automáticamente.
+
+def ordena_lista(array, parametro):
+    #Utilizamos la funcion del algoritmo quick sort para resolverlo
+    def descendente(array):
+        if len(array) < 2:
+            return array
+        pivote = array[len(array) // 2] #Elegimos el parametor de pivote
+        mayores = [x for x in array if x > pivote] #lista de numeros mayores que el pivote
+        iguales = [x for x in array if x == pivote] #lista de numeros iguales al pivote
+        menores = [x for x in array if x < pivote] #lista de numeros menores que el pivote
+        return descendente(mayores)+iguales+descendente(menores)  #Empleamos recursividad y concatenamos las listas
+    
+    if parametro == "Asc":
+        return descendente(array)[::-1]
+    elif parametro == "Desc":
+        return descendente(array)
+    else:
+        return "Introduzca un parametro válido ('Asc' o 'Desc')"
+        
+    
